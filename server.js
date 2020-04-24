@@ -23,7 +23,7 @@ mongoose.connect(
     useUnifiedTopology: true,
   }
 );
-//mongoose.set("useUnifiedTopology", true);
+
 mongoose.connection
   .once("open", () => {
     console.log("connected to MongoDB");
