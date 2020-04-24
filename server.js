@@ -1,9 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -15,14 +16,11 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(
-  "mongodb+srv://beenish:beenish@cluster0-l7qiy.mongodb.net/test?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(process.env.DB_URI, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+});
 
 mongoose.connection
   .once("open", () => {
