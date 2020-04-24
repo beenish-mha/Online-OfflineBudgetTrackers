@@ -15,11 +15,20 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/budget", {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-});
-
+mongoose.connect(
+  "mongodb+srv://beenish:beenish@cluster0-l7qiy.mongodb.net/test?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+  }
+);
+mongoose.connection
+  .once("open", () => {
+    console.log("connected to MongoDB");
+  })
+  .on("error", (error) => {
+    console.log("not connected" + error);
+  });
 // routes
 app.use(require("./routes/api.js"));
 
