@@ -20,8 +20,10 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useFindAndModify: false,
+    useUnifiedTopology: true,
   }
 );
+//mongoose.set("useUnifiedTopology", true);
 mongoose.connection
   .once("open", () => {
     console.log("connected to MongoDB");
